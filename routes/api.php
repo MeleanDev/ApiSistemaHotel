@@ -1,10 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admins\HabitacioneController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Habitaciones
+Route::controller(HabitacioneController::class)->group(function () {
+    Route::get('habitaciones', 'lista');
+    Route::post('habitaciones', 'crear');
+});
 
 
