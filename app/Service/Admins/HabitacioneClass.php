@@ -30,5 +30,11 @@ class HabitacioneClass
         $this->ConsultasDB->HabitacionesCrear($dato);
     }
 
-    
+    public function editar($id, $datos){
+        $this->ConsultasDB->HabitacionesEditar($id, $datos);
+    }
+
+    public function eliminar($id){
+        $this->ConsultasDB->HabitacionesEliminar($id);
+    }
 }

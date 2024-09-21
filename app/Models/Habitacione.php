@@ -21,6 +21,6 @@ class Habitacione extends Model
         'Piso',
         'Tipo',
         'Disponibilidad',
-        'Num_Persona'
+        'NumPersonas'
     ];
 }

@@ -26,5 +26,17 @@ class ConsultasDB
         $habita->save();
     }
 
-    
+    // Editar
+    public function HabitacionesEditar($id, $datos){
+        $id->Piso = $datos->input('Piso');
+        $id->Tipo = $datos->input('Tipo');
+        $id->Disponibilidad = $datos->input('Disponibilidad');
+        $id->NumPersonas = $datos->input('NumPersonas');
+        $id->save();
+    }
+
+    // Eliminar
+    public function HabitacionesEliminar($id){
+        $id->delete();
+    }
 }

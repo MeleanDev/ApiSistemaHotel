@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('Piso')->nullable();
             $table->char('Tipo', 1)->nullable();
             $table->char('Disponibilidad', 1)->nullable();
-            $table->integer('Num_Personas')->nullable();
+            $table->integer('NumPersonas')->nullable();
         });
     }
 
