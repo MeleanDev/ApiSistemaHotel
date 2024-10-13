@@ -18,11 +18,10 @@ class Sede extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'nombre',
-        'ubicaciones_id'
+        'nombre'
     ];
 
-    public function ubicaciones()
+    public function ubicacione(): HasOne
     {
         return $this->hasOne(Ubicacione::class);
     }

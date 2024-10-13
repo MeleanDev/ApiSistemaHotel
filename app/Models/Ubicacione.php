@@ -20,7 +20,8 @@ class Ubicacione extends Model
         'pais',
         'estado',
         'municipio',
-        'direccion'
+        'direccion',
+        'sede_id'
     ];
 
     public function sede()

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('ubicaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('pais');
-            $table->string('estado');
-            $table->string('municipio');
-            $table->string('direccion');
+            $table->string('pais', 45);
+            $table->string('estado', 45);
+            $table->string('municipio', 45);
+            $table->string('direccion', 45);
+            $table->foreignId('sede_id')->unique()->references('id')->on('sedes')->onDelete('cascade');
         });
     }
 

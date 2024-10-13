@@ -13,14 +13,10 @@ return new class extends Migration
     {
         Schema::create('sedes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->foreignId('ubicaciones_id')->constrained('ubicaciones')->onDelete('cascade');
+            $table->string('nombre', 45)->unique();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('sedes');
