@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Ubicacione extends Model
+class Sede extends Model
 {
     use HasFactory;
 
@@ -17,14 +18,12 @@ class Ubicacione extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'pais',
-        'estado',
-        'municipio',
-        'direccion'
+        'nombre',
+        'ubicaciones_id'
     ];
 
-    public function sede()
+    public function ubicaciones()
     {
-        return $this->belongsTo(Sede::class);
+        return $this->hasOne(Ubicacione::class);
     }
 }
