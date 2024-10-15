@@ -94,7 +94,15 @@ class HabitacioneController extends Controller
     public function Btipo($tipo): JsonResponse
     {
         $datos = $this->habitacioneClass->tipo($tipo);
-        if($datos == null) $datos = "No existe ninguna habitacion con ese Tipo";
+        if ($datos->isEmpty()) {
+            return response()->json(
+                [
+                    'error' => true,
+                    'msj' => 'No hay habitaciones de ese tipo'
+                ],
+                200
+            );
+        }
         return response()->json(
             [
                 'success' => true,

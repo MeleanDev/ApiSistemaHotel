@@ -45,7 +45,7 @@ class SedeController extends Controller
             $repuesta = response()->json([
                 'success' => true,
                 'msj' => 'Sede Creada con exito'
-            ], 200);
+            ], 201);
         } catch (\Throwable $th) {
             $repuesta = response()->json([
                 'error' => false,
