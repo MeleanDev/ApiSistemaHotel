@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Ubicacione extends Model
+class Habitacione extends Model
 {
     use HasFactory;
 
@@ -18,12 +18,14 @@ class Ubicacione extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'pais',
-        'estado',
-        'municipio',
-        'direccion',
+        'identificador',
+        'piso',
+        'tipo',
+        'disponibilidad',
+        'numPersonas',
+        'precio',
         'sede_id'
-    ];
+        ];
 
     protected $hidden = ['sede_id'];
 

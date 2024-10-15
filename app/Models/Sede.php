@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Sede extends Model
@@ -24,5 +25,10 @@ class Sede extends Model
     public function ubicacione(): HasOne
     {
         return $this->hasOne(Ubicacione::class);
+    }
+
+    public function habitacione(): HasMany
+    {
+        return $this->hasMany(Habitacione::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Service\DB;
 
+use App\Models\Habitacione;
 use App\Models\Sede;
 use App\Models\Ubicacione;
 
@@ -48,5 +49,49 @@ class consultasClass
         {
             $datos = Sede::with('ubicacione')->find($id);
             return $datos;
+        }
+
+    // Habitaciones
+        // Lista
+        public function HabitacionesLista(){
+            $datos = Habitacione::with('sede')->get();
+            return $datos;
+        }
+
+        // Crear
+        public function HabitacionesCrear($datos){
+            $habi = new Habitacione();
+            $habi->identificador = $datos['identificador'];
+            $habi->piso = $datos['piso'];
+            $habi->tipo = $datos['tipo'];
+            $habi->disponibilidad = $datos['disponibilidad'];
+            $habi->numPersonas = $datos['numPersonas'];
+            $habi->precio = $datos['precio'];
+            $habi->sede_id = $datos['sede_id'];
+            $habi->save();
+        }
+
+        // editar
+        public function HabitacionesEditar($datos, $id){
+            $id->identificador = $datos['identificador'];
+            $id->piso = $datos['piso'];
+            $id->tipo = $datos['tipo'];
+            $id->disponibilidad = $datos['disponibilidad'];
+            $id->numPersonas = $datos['numPersonas'];
+            $id->precio = $datos['precio'];
+            $id->sede_id = $datos['sede_id'];
+            $id->save();
+        }
+
+        // Buscar por identificador
+        public function HabitacionesIdentificador($dato){
+            $habitacion = Habitacione::where('identificador', $dato)->with('sede')->first();
+            return $habitacion;
+        }
+
+        // Buscar por Tipo
+        public function HabitacionesTipo($dato){
+            $habitacion = Habitacione::where('tipo', $dato)->with('sede')->get();
+            return $habitacion;
         }
 }
