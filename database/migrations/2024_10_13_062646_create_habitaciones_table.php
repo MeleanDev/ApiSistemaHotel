@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('disponibilidad', 1);
             $table->integer('numPersonas');
             $table->float('precio');
-            $table->foreignId('sede_id')->unique()->references('id')->on('sedes')->onDelete('cascade');
+            $table->foreignId('sede_id')->references('id')->on('sedes')->onDelete('cascade');
         });
     }
 
