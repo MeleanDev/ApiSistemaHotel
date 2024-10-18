@@ -31,4 +31,9 @@ class Sede extends Model
     {
         return $this->hasMany(Habitacione::class);
     }
+
+    public function user(): HasMany
+    {
+        return $this->hasMany(user::class);
+    }
 }

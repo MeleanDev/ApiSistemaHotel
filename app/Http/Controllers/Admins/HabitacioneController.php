@@ -80,35 +80,4 @@ class HabitacioneController extends Controller
             'msj' => 'Habitacion eliminada'
         ]);
     }
-
-    public function Bidentificador($identificador): JsonResponse
-    {
-        $datos = $this->habitacioneClass->identificador($identificador);
-        if($datos == null) $datos = "No existe ninguna habitacion con ese Identificador";
-        return response()->json([
-            'success' => true,
-            'Habitacion' => $datos
-        ], 200);
-    }
-
-    public function Btipo($tipo): JsonResponse
-    {
-        $datos = $this->habitacioneClass->tipo($tipo);
-        if ($datos->isEmpty()) {
-            return response()->json(
-                [
-                    'error' => true,
-                    'msj' => 'No hay habitaciones de ese tipo'
-                ],
-                200
-            );
-        }
-        return response()->json(
-            [
-                'success' => true,
-                'Habitaciones' => $datos
-            ],
-            200
-        );
-    }
 }

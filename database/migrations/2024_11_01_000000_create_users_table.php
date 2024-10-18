@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('sede_id')->nullable()->references('id')->on('sedes')->onDelete('cascade');
             $table->rememberToken();
-            $table->timestamps();
+            // $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
