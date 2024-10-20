@@ -38,6 +38,27 @@ class HabitacioneController extends Controller
         );
     }
 
+    public function listaModerador(): JsonResponse
+    {
+        $datos = $this->habitacioneClass->listaModerador();
+        if ($datos->isEmpty()) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'msj' => 'No se encuentran registros'
+                ],
+                200
+            );
+        }
+        return response()->json(
+            [
+                'success' => true,
+                'Habitaciones' => $datos
+            ],
+            200
+        );
+    }
+
     public function crear(HabitacionRequest $datos): JsonResponse
     {
         try {

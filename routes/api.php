@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admins\HabitacioneController;
 use App\Http\Controllers\Admins\SedeController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
     // Habitaciones
     Route::controller(HabitacioneController::class)->group(function () {
         Route::get('Habitaciones', 'lista');
+        Route::get('Habitaciones/Moderador', 'listaModeradro');
         Route::post('Habitaciones', 'crear');
         Route::post('Habitaciones/Editar/{id}', 'editar');
         Route::delete('Habitaciones/Eliminar/{id}', 'eliminar');
@@ -30,7 +32,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('Huesped/Lista', 'listaHuesped');
         Route::get('Moderador/Lista', 'listaModeradores');
         Route::get('Administrador/Lista', 'listaAdministradores');
-        Route::post('Registro/Huesped', 'registerHuesped');
+        Route::post('Registro/Huesped', 'registerHuesped'); 
         Route::post('Registro/Moderador', 'registerModerador');
         Route::post('Registro/Administrador', 'registerAdministrador');
         Route::post('User/Editar/{id}', 'editarPanel');
@@ -39,5 +41,10 @@ use Illuminate\Support\Facades\Route;
     });
 
     // Reservas
+    Route::controller(ReservaController::class)->group(function () {
+        Route::get('Reservas/Lista/PanelAdmin', 'listaPanelAdmin');
+        Route::get('Reservas/Lista/PanelModerador', 'listaPanelModerador');
+        Route::get('Reservas/Lista/Huesped', 'listaHuesped');
+    });
 
 // });

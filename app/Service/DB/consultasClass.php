@@ -3,6 +3,7 @@
 namespace App\Service\DB;
 
 use App\Models\Habitacione;
+use App\Models\Reserva;
 use App\Models\Sede;
 use App\Models\Ubicacione;
 use App\Models\User;
@@ -66,6 +67,14 @@ class consultasClass
         public function HabitacionesLista()
         {
             $datos = Habitacione::with('sede')->get();
+            return $datos;
+        }
+
+        // Lista Moderador
+        public function HabitacionesListaModerador()
+        {
+            $user = $this->buscarAuth();
+            $datos = Habitacione::with('sede')->where('sede_id', $user->sede_id)->get();
             return $datos;
         }
 
@@ -152,6 +161,29 @@ class consultasClass
             $authUser->password = Hash::make($datos['password']);
             $authUser->save();
         }
+
+    // Reservas
+        // Lista
+            // Admin
+            public function ReservaListaAdmin(){
+                $datos = Reserva::with('user')->with('habitacione')->get();
+                return $datos;
+            }
+
+            // Moderador
+            public function ReservaListaModerador(){
+                $user = $this->buscarAuth();
+                $datos = Reserva::with('user')->with('habitacione')->where('sede_id', $user->sede_id)->get();
+                return $datos;
+            }
+
+            // Huesped
+            public function ReservaListaHuesped(){
+                $user = $this->buscarAuth();
+                $datos = Reserva::with('habitacione')->where('user', $user->id)->get();
+                return $datos;
+            }
+        
 
 
 }
