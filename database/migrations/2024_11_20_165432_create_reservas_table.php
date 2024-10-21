@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->string('estado')->nullable();
-            $table->string('identificador')->unique();
+            $table->string('estado', 15);
+            $table->string('identificador', 50)->unique();
             $table->dateTime('fecha_entrada');
             $table->dateTime('fecha_salida');
             $table->foreignId('habitacione_id')->references('id')->on('habitaciones')->onDelete('cascade');

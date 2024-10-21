@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Service\UserClass;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +19,29 @@ class UserController extends Controller
         $this->usersClass = $usersClass;
     }
 
-    public function login() {}
+    public function login(LoginRequest $datos){
+        if (!Auth::attempt($datos->only('email', 'password'))) {
+            return response()->json([
+                'mensaje' => 'Usuario No Logiado'
+            ], 400);
+        }
+
+        $email = User::where('email', $datos->email)->firstOrFail();
+        $token = $email->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'mensaje' => 'Usurio logiado',
+            'usuario' => $email->nombre.' '.$email->apellido ,
+            'rol' => $email->tipo,
+            'accessToken' => $token,
+            'token_type' => 'Bearer'
+        ], 200);
+    }
+
+    public function logout(Request $request){
+        $request->user()->tokens()->delete();
+        return ['mensaje' => 'Logout Exitoso'];
+    }
 
     // Listas
         // ListaHuesped
@@ -84,7 +109,40 @@ class UserController extends Controller
                 200
             );
         }
+    
+    // Detalle
+        public function detalleTrabajadores($id): JsonResponse
+        {
+            try {
+                $datos = User::with('sede')->find($id);
+                $respuesta = response()->json([
+                    'success' => true,
+                    'user' => $datos
+                ]);
+            } catch (\Throwable $th) {
+                $respuesta = response()->json([
+                    'error' => true,
+                    'msj' => 'No se encontro User con ese id'
+                ]);
+            }
+            return $respuesta;
+        }
 
+        public function detalleHuesped(user $id): JsonResponse
+        {
+            try {
+                $respuesta = response()->json([
+                    'success' => true,
+                    'user' => $id
+                ]);
+            } catch (\Throwable $th) {
+                $respuesta = response()->json([
+                    'error' => true,
+                    'msj' => 'No se encontro User con ese id'
+                ]);
+            }
+            return $respuesta;
+        }
     // Crear
     public function registerHuesped(UserRequest $datos): JsonResponse
     {

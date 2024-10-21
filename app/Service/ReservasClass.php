@@ -27,4 +27,28 @@ class ReservasClass
         $datos = $this->consultaDB->ReservaListaHuesped();
         return $datos;
     }
+
+    public function crear($datos){
+        $this->consultaDB->ReservaCrear($datos);
+    }
+
+    public function crearTrabajador($datos){
+        $this->consultaDB->ReservaCrearTrabajador($datos);
+    }
+
+    public function editar($datos, $id){
+        if ($datos['estado'] == true && $datos['estado'] == 'activa') {
+            $this->consultaDB->disponibilidad($datos['habitacione_id'], 'N');
+        }
+
+        if ($datos['estado'] == true && $datos['terminada'] == 'terminada') {
+            $this->consultaDB->disponibilidad($datos['habitacione_id'], 'S');
+        }
+
+        if ($datos['estado'] == true && $datos['cancelada'] == 'cancelada') {
+            $this->consultaDB->disponibilidad($datos['habitacione_id'], 'S');
+        }
+
+        $this->consultaDB->ReservaEditar($datos, $id);
+    }
 }

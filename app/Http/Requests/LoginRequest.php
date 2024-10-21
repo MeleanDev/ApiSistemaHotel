@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admins;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HabitacionRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,8 @@ class HabitacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'identificador' => ['required', 'max:5', 'min:1'],
-            'piso' => ['required', 'integer', 'max_digits:3', 'min_digits:1'],
-            'tipo' => ['required', 'string', 'max:1', 'min:1'],
-            'numPersonas' => ['required', 'integer', 'min_digits:1', 'max_digits:4'],
-            'precio' => ['required'],
-            'sede_id' => ['required']
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string']
         ];
     }
 }

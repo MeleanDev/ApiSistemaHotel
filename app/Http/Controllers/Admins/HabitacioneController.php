@@ -59,6 +59,23 @@ class HabitacioneController extends Controller
         );
     }
 
+    public function detalle($id): JsonResponse
+    {
+        try {
+            $datos = Habitacione::with('sede')->find($id);
+            $respuesta = response()->json([
+                'success' => true,
+                'habitacion' => $datos
+            ]);
+        } catch (\Throwable $th) {
+            $respuesta = response()->json([
+                'error' => true,
+                'msj' => 'No se encontro habitacion con ese id'
+            ]);
+        }
+        return $respuesta;
+    }
+
     public function crear(HabitacionRequest $datos): JsonResponse
     {
         try {

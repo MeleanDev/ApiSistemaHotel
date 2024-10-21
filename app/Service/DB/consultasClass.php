@@ -19,6 +19,12 @@ class consultasClass
             $usu = User::find($id);
             return $usu;
         }
+
+        public function disponibilidad($idhabitacion, $estado){
+            $habitacion = Habitacione::find($idhabitacion);
+            $habitacion->disponibilidad = $estado;
+            $habitacion->save();
+        }
     // Sede
         // Lista
         public function SedesLista()
@@ -86,7 +92,7 @@ class consultasClass
             $habi->identificador = $datos['identificador'];
             $habi->piso = $datos['piso'];
             $habi->tipo = $datos['tipo'];
-            $habi->disponibilidad = $datos['disponibilidad'];
+            $habi->disponibilidad = 'S';
             $habi->numPersonas = $datos['numPersonas'];
             $habi->precio = $datos['precio'];
             $habi->sede_id = $authUser->sede_id;
@@ -99,7 +105,6 @@ class consultasClass
             $id->identificador = $datos['identificador'];
             $id->piso = $datos['piso'];
             $id->tipo = $datos['tipo'];
-            $id->disponibilidad = $datos['disponibilidad'];
             $id->numPersonas = $datos['numPersonas'];
             $id->precio = $datos['precio'];
             $id->save();
@@ -183,6 +188,43 @@ class consultasClass
                 $datos = Reserva::with('habitacione')->where('user', $user->id)->get();
                 return $datos;
             }
+
+        // Crear
+            // Normal
+            public function ReservaCrear($datos){
+                $user = $this->buscarAuth();
+                $rese = new Reserva();
+                $rese->estado = 'En Proceso';
+                $rese->identificador = now().''.$user->id;
+                $rese->fecha_entrada = $datos['fecha_entrada'];
+                $rese->fecha_salida = $datos['fecha_salida'];
+                $rese->habitacione_id = $datos['habitacione_id'];
+                $rese->user()->associate($user);
+                $rese->save();
+            }
+
+            // Admin o moderador
+            public function ReservaCrearTrabajador($datos){
+                $user = $this->buscarAuth();
+                $rese = new Reserva();
+                $rese->estado = 'En Proceso';
+                $rese->identificador = now().''.$user->id;
+                $rese->fecha_entrada = $datos['fecha_entrada'];
+                $rese->fecha_salida = $datos['fecha_salida'];
+                $rese->habitacione_id = $datos['habitacione_id'];
+                $rese->user_id = $datos['user_id'];
+                $rese->save();
+            }
+
+        // Editar
+        public function ReservaEditar($datos, $id){
+            $id->estado = $datos['estado'];
+            $id->fecha_entrada = $datos['fecha_entrada'];
+            $id->fecha_salida = $datos['fecha_salida'];
+            $id->habitacione_id = $datos['habitacione_id'];
+            $id->user_id = $datos['user_id'];
+            $id->save();
+        }
         
 
 

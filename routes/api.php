@@ -6,8 +6,12 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::controller(UserController::class)->group(function () {
+    Route::post('Login', 'login');
+    Route::post('Registro/Huesped', 'registerHuesped'); 
+});
 
-// Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     // Sede
     Route::controller(SedeController::class)->group(function () {
@@ -22,6 +26,7 @@ use Illuminate\Support\Facades\Route;
     Route::controller(HabitacioneController::class)->group(function () {
         Route::get('Habitaciones', 'lista');
         Route::get('Habitaciones/Moderador', 'listaModeradro');
+        Route::get('Habitaciones/Detalle/{id}', 'detalle');
         Route::post('Habitaciones', 'crear');
         Route::post('Habitaciones/Editar/{id}', 'editar');
         Route::delete('Habitaciones/Eliminar/{id}', 'eliminar');
@@ -29,10 +34,12 @@ use Illuminate\Support\Facades\Route;
 
     // Users
     Route::controller(UserController::class)->group(function () {
+        Route::get('Logout', 'logout');
         Route::get('Huesped/Lista', 'listaHuesped');
         Route::get('Moderador/Lista', 'listaModeradores');
         Route::get('Administrador/Lista', 'listaAdministradores');
-        Route::post('Registro/Huesped', 'registerHuesped'); 
+        Route::get('User/Detalle/Trabajadores/{id}', 'detalleTrabajadores');
+        Route::get('User/Detalle/Huesped/{id}', 'detalleHuesped');
         Route::post('Registro/Moderador', 'registerModerador');
         Route::post('Registro/Administrador', 'registerAdministrador');
         Route::post('User/Editar/{id}', 'editarPanel');
@@ -45,6 +52,9 @@ use Illuminate\Support\Facades\Route;
         Route::get('Reservas/Lista/PanelAdmin', 'listaPanelAdmin');
         Route::get('Reservas/Lista/PanelModerador', 'listaPanelModerador');
         Route::get('Reservas/Lista/Huesped', 'listaHuesped');
+        Route::post('Reservas/Crear', 'reservaCrear');
+        Route::post('Reservas/CrearModerador', 'reservaModerador');
+        Route::post('Reservas/Editar/{id}', 'reservaModerador');
     });
 
-// });
+});
