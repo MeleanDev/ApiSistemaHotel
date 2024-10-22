@@ -18,11 +18,6 @@ class ReservasClass
         return $datos;
     }
 
-    public function ListaModerador(){
-        $datos = $this->consultaDB->ReservaListaModerador();
-        return $datos;
-    }
-
     public function ListaHuesped(){
         $datos = $this->consultaDB->ReservaListaHuesped();
         return $datos;

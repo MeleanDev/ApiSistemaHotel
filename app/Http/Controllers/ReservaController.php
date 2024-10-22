@@ -37,27 +37,6 @@ class ReservaController extends Controller
             );
     }
 
-    public function listaPanelModerador(): JsonResponse
-    {   
-        $datos = $this->reservaClass->ListaModerador();
-            if ($datos->isEmpty()) {
-                return response()->json(
-                    [
-                        'success' => true,
-                        'msj' => 'No se encuentran registros'
-                    ],
-                    200
-                );
-            }
-            return response()->json(
-                [
-                    'success' => true,
-                    'reservas' => $datos
-                ],
-                200
-            );
-    }
-
     public function listaHuesped(): JsonResponse
     {
         $datos = $this->reservaClass->ListaHuesped();

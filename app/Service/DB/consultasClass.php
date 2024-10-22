@@ -175,13 +175,6 @@ class consultasClass
                 return $datos;
             }
 
-            // Moderador
-            public function ReservaListaModerador(){
-                $user = $this->buscarAuth();
-                $datos = Reserva::with('user')->with('habitacione')->where('sede_id', $user->sede_id)->get();
-                return $datos;
-            }
-
             // Huesped
             public function ReservaListaHuesped(){
                 $user = $this->buscarAuth();
