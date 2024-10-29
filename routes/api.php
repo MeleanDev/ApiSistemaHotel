@@ -11,6 +11,11 @@ Route::controller(UserController::class)->group(function () {
     Route::post('Registro/Huesped', 'registerHuesped'); 
 });
 
+// Habitaciones
+Route::controller(HabitacioneController::class)->group(function () {
+    Route::get('Habitaciones', 'lista');
+});
+
 Route::middleware('auth:sanctum')->group(function () {
 
     // Sede
@@ -24,7 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Habitaciones
     Route::controller(HabitacioneController::class)->group(function () {
-        Route::get('Habitaciones', 'lista');
         Route::get('Habitaciones/Moderador', 'listaModeradro');
         Route::get('Habitaciones/Detalle/{id}', 'detalle');
         Route::post('Habitaciones', 'crear');

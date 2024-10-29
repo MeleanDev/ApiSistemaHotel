@@ -178,7 +178,7 @@ class consultasClass
             // Huesped
             public function ReservaListaHuesped(){
                 $user = $this->buscarAuth();
-                $datos = Reserva::with('habitacione')->where('user', $user->id)->get();
+                $datos = Reserva::with('habitacione')->where('user_id', $user->id)->get();
                 return $datos;
             }
 
