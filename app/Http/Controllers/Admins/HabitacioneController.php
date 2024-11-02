@@ -59,6 +59,23 @@ class HabitacioneController extends Controller
         );
     }
 
+    public function cantidad(): JsonResponse
+    {
+        try {
+            $datos = Habitacione::count();
+            $respuesta = response()->json([
+                'success' => true,
+                'cantidad' => $datos
+            ]);
+        } catch (\Throwable $th) {
+            $respuesta = response()->json([
+                'error' => true,
+                'msj' => 'Error no en el sistema'
+            ]);
+        }
+        return $respuesta;
+    }
+
     public function detalle($id): JsonResponse
     {
         try {

@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Habitaciones
     Route::controller(HabitacioneController::class)->group(function () {
+        Route::get('Habitaciones/Cantidad', 'cantidad');
         Route::get('Habitaciones/Moderador', 'listaModeradro');
         Route::get('Habitaciones/Detalle/{id}', 'detalle');
         Route::post('Habitaciones', 'crear');
