@@ -26,6 +26,7 @@ class ReservaController extends Controller
                 $data['mes'][] = $item->mes;  // Agrega el mes a la clave 'label'
                 $data['cantidad'][] = $item->cantidad; // Agrega la cantidad a la clave 'data'
             }
+            $data['data'] = json_encode($data);
             $respuesta = response()->json([
                 'success' => true,
                 'datos' => $data,
