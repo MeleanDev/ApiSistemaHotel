@@ -62,10 +62,15 @@ class HabitacioneController extends Controller
     public function cantidad(): JsonResponse
     {
         try {
-            $datos = Habitacione::count();
+            $Totales = Habitacione::count();
+            $Disponibles = Habitacione::where('estado', 'S')->count();
+            $Ocupadas = Habitacione::where('estado', 'N')->count();
+
             $respuesta = response()->json([
                 'success' => true,
-                'cantidad' => $datos
+                'Totales' => $Totales,
+                'Disponibles' => $Disponibles,
+                'Ocupadas' => $Ocupadas,
             ]);
         } catch (\Throwable $th) {
             $respuesta = response()->json([
