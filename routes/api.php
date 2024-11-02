@@ -54,6 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Reservas
     Route::controller(ReservaController::class)->group(function () {
+        Route::get('Reservas/Cantidad', 'meses');
         Route::get('Reservas/Lista/PanelAdmin', 'listaPanelAdmin');
         Route::get('Reservas/Lista/Huesped', 'listaHuesped');
         Route::post('Reservas/Crear', 'reservaCrear');
