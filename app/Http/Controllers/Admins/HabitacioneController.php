@@ -63,8 +63,8 @@ class HabitacioneController extends Controller
     {
         try {
             $Totales = Habitacione::count();
-            $Disponibles = Habitacione::where('estado', 'S')->count();
-            $Ocupadas = Habitacione::where('estado', 'N')->count();
+            $Disponibles = Habitacione::where('disponibilidad', 'S')->count();
+            $Ocupadas = Habitacione::where('disponibilidad', 'N')->count();
 
             $respuesta = response()->json([
                 'success' => true,
